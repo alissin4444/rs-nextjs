@@ -2,8 +2,15 @@ import { useState, useEffect } from "react";
 
 import { Title } from "../styles/pages/Home";
 
+interface IProduct {
+  id: number;
+  title: string;
+}
+
 export default function Home() {
-  const [recommendedProducts, setRecommendedProducts] = useState([]);
+  const [recommendedProducts, setRecommendedProducts] = useState<IProduct[]>(
+    []
+  );
 
   useEffect(() => {
     fetch("http://localhost:3333/recommended").then((response) => {
@@ -13,10 +20,14 @@ export default function Home() {
 
   return (
     <div>
-      <Title>Hello World</Title>
-      {recommendedProducts.map((product) => (
-        <p key={product.id}>{product.title}</p>
-      ))}
+      <section>
+      <Title>Products</Title>
+      <ul>
+        {recommendedProducts.map((product) => (
+          <li key={product.id}>{product.title}</li>
+        ))}
+      </ul>
+      </section>
     </div>
   );
 }
