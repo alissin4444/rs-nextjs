@@ -15,6 +15,10 @@ export default function Category({ products }: CategoryProps) {
 
   const { slug } = router.query;
 
+  if (router.isFallback) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
       <h1>{slug}</h1>
@@ -39,7 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -57,5 +61,6 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async (
     props: {
       products,
     },
+    revalidate: 5,
   };
 };
