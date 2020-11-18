@@ -2,12 +2,9 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
-const AddToCartModal = dynamic(
-  () => import("../../../components/AddToCartModal"),
-  {
-    loading: () => <p>Loading...</p>,
-  }
-);
+const AddToCartModal = dynamic(() => import("@components/AddToCartModal"), {
+  loading: () => <p>Loading...</p>,
+});
 
 export default function Product() {
   const router = useRouter();
